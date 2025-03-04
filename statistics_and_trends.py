@@ -19,6 +19,7 @@ def plot_relational_plot(df):
     fig, ax = plt.subplots()
     sns.scatterplot(data=df,x='enrollee_id',y='experience')
     plt.savefig('relational_plot.png')
+    plt.close()
     return
 
 
@@ -26,15 +27,15 @@ def plot_categorical_plot(df):
     fig, ax = plt.subplots()
     sns.countplot(data=df,x='experience')
     plt.savefig('categorical_plot.png')
+    plt.close()
     return
-
 
 def plot_statistical_plot(df):
     fig, ax = plt.subplots()
-    sns.histplot(data=df,x='enrollee_id',y='experience')
+    sns.histplot(data=df,x='experience')
     plt.savefig('statistical_plot.png')
+    plt.close()
     return
-
 
 def statistical_analysis(df, col: str):
     mean =df[col].mean()
@@ -42,6 +43,7 @@ def statistical_analysis(df, col: str):
     skew =ss.skew(df[col])
     excess_kurtosis =ss.kurtosis(df[col])
     return mean, stddev, skew, excess_kurtosis
+    
 
 
 def preprocessing(df):
@@ -73,14 +75,14 @@ def writing(moments, col):
         kur_des = "leptokurtic (peaked)"
     elif ex_kur < -1:
         kur_des = "platykurtic (flat)"
-    print('The data was right/left/not skewed and platy/meso/leptokurtic.')
+    print(f'The data was {sk_des} and {kur_des}.')
     return
 
 
 def main():
     df = pd.read_csv('data.csv')
     df = preprocessing(df)
-    col = 'col'
+    col = 'experience'
     plot_relational_plot(df)
     plot_statistical_plot(df)
     plot_categorical_plot(df)
