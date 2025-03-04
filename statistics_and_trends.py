@@ -17,37 +17,45 @@ import seaborn as sns
 
 def plot_relational_plot(df):
     fig, ax = plt.subplots()
+    sns.scatterplot(data=df,x='enrollee_id',y='experience')
     plt.savefig('relational_plot.png')
     return
 
 
 def plot_categorical_plot(df):
     fig, ax = plt.subplots()
+    sns.countplot(data=df,x='experience')
     plt.savefig('categorical_plot.png')
     return
 
 
 def plot_statistical_plot(df):
     fig, ax = plt.subplots()
+    sns.histplot(data=df,x='enrollee_id',y='experience')
     plt.savefig('statistical_plot.png')
     return
 
 
 def statistical_analysis(df, col: str):
-    mean =
-    stddev =
-    skew =
-    excess_kurtosis =
+    mean =df[col].mean()
+    stddev =df[col].std()
+    skew =ss.skew(df[col])
+    excess_kurtosis =ss.kurtosis(df[col])
     return mean, stddev, skew, excess_kurtosis
 
 
 def preprocessing(df):
     # You should preprocess your data in this function and
     # make use of quick features such as 'describe', 'head/tail' and 'corr'.
+    print(df.describe())
+    print(df.head())
+    print(df.tail())
+    print(df.corr())
     return df
 
 
 def writing(moments, col):
+    mean,stddev,skew,ex_kur=moments
     print(f'For the attribute {col}:')
     print(f'Mean = {moments[0]:.2f}, '
           f'Standard Deviation = {moments[1]:.2f}, '
@@ -55,6 +63,16 @@ def writing(moments, col):
           f'Excess Kurtosis = {moments[3]:.2f}.')
     # Delete the following options as appropriate for your data.
     # Not skewed and mesokurtic can be defined with asymmetries <-2 or >2.
+    sk_des="not skewed"
+    if skew>2:
+        sk_des="right-skewed"
+    elif skew<-2:
+        sk+des="left-skewed"
+    kur_des= "mesokurtic"
+    if ex_kur > 1:
+        kur_des = "leptokurtic (peaked)"
+    elif ex_kur < -1:
+        kurtosis_desc = "platykurtic (flat)"
     print('The data was right/left/not skewed and platy/meso/leptokurtic.')
     return
 
