@@ -67,12 +67,12 @@ def writing(moments, col):
     if skew>2:
         sk_des="right-skewed"
     elif skew<-2:
-        sk+des="left-skewed"
+        sk_des="left-skewed"
     kur_des= "mesokurtic"
     if ex_kur > 1:
         kur_des = "leptokurtic (peaked)"
     elif ex_kur < -1:
-        kurtosis_desc = "platykurtic (flat)"
+        kur_des = "platykurtic (flat)"
     print('The data was right/left/not skewed and platy/meso/leptokurtic.')
     return
 
@@ -80,7 +80,7 @@ def writing(moments, col):
 def main():
     df = pd.read_csv('data.csv')
     df = preprocessing(df)
-    col = '<your chosen column for analysis>'
+    col = 'col'
     plot_relational_plot(df)
     plot_statistical_plot(df)
     plot_categorical_plot(df)
