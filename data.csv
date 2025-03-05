@@ -1,1 +1,6 @@
-You will need to replace this file with your actual data, keep the filename the same.
+#You will need to replace this file with your actual data, keep the filename the same.
+import kaggle
+import zipfile
+import os
+
+dataset="
